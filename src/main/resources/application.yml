@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: anchor
+  datasource:
+    url: jdbc:postgresql://localhost:5432/anchor
+    username: anchor
+    password: anchor
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  ai:
+    model:
+      chat: ollama
+      embedding: ollama
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: llama3.2
+      embedding:
+        model: nomic-embed-text
+      init:
+        pull-model-strategy: when_missing
+    vectorstore:
+      pgvector:
+        index-type: hnsw
+        distance-type: cosine_distance
+        dimensions: 768
+        initialize-schema: true
+
+anchor:
+  verification:
+    top-k-context: 5
